@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>web_cam</title>
+    </head>
+    
+    <body>
+		<div>
+			<div id="div_left" style="float:left; width:80%; height:100%;">
+				<h2>Real-time camera</h2>
+				<img src="{{ url_for('camera') }}" style="width:80%">
+			</div>
+			<div id="div_right" style="float:right; width:20%">
+                <h2>Real-time status</h2>
+                <img src="{{ url_for('orientation') }}" style="width:80%">
+                <br><br><br>
+                <img src="{{ url_for('compass') }}" style="width:80%">
+                <br><br>
+                <div id="text">
+                    <embed src="{{ url_for('text') }}" type="text/plain">
+                </div>
+            </div>
+		</div>
+    </body>
+</html>
