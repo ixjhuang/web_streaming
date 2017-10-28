@@ -1,13 +1,12 @@
 import time
 import random
-from PIL import Image
 from flask import Flask
-from flask import url_for
 from flask import Response
 from flask import render_template
-from streaming.cam_opencv import Camera
+from streaming.camera import Camera
 from streaming.orientation import Orientation
 from streaming.compass import Compass
+from streaming.text import Text
 
 
 app = Flask(__name__)
@@ -46,23 +45,10 @@ def compass():
     return Response(png_stream(Compass()),
                     mimetype='multipart/x-mixed-replace; boundary=png')
 
-# text: text streaming
-def getText():
-    while True:
-        time.sleep(0.5)
-        h = random.randint(0, 90)
-        t = random.randint(-10, 40)
-        p = random.randint(100, 1000)
-        textResponse = ('Height: %s m\r\n'
-                        'Temperature: %s *C\r\n'
-                        'Presure: %s Mpa\r\n' % (h, t, p)).encode()
-        yield (b'--text\r\n'
-               b'Content-Type: text/plain\r\n\r\n' + textResponse + b'\r\n')
-        
 @app.route('/text')
 def text():
-    return Response(getText(),
-           mimetype='multipart/x-mixed-replace; boundary=text')
+    return Response(png_stream(Text()),
+           mimetype='multipart/x-mixed-replace; boundary=png')
 
 
 if __name__ == '__main__':
