@@ -4,7 +4,7 @@ MarkupSafe==1.0
 Pillow==4.2.1
 PyInstaller==3.3
 RPi.GPIO==0.6.2
-Werkzeug==0.12.2
+Werkzeug==0.15.3
 altgraph==0.14
 chardet==2.3.0
 click==6.7
